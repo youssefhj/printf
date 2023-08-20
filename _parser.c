@@ -10,37 +10,49 @@
 int _parser(const char *format, va_list ptr)
 {
 	int c, len;
+	char *str;
 
 	if (format == NULL)
 		return (-1);
 
 	for (c = 0, len = 0 ; format[c] != '\0' ; c++)
 	{
-		if (c == '%' && format[c + 1] != '\0')
+		if (format[c] == '%' && format[c + 1] != '\0')
 		{
-			switch (c + 1)
+			switch (format[c + 1])
 			{
 				case 'c':
-					_putchar((char)av_arg(ptr, int));
-					c += 2;
+					_putchar((char)va_arg(ptr, int));
 					len++;
 					break;
 
 				case 's':
-					char *str = av_arg(ptr, char*);
+					str = va_arg(ptr, char*);
 
 					while (*str)
 					{
-						len++
-						_putchar(str++);
+						_putchar(*str++);
+						len++;
 					}
-					c += 2;
 					break;
+				
+				case '%':
+					_putchar('%');
+					len++;
+					break;
+			
+				case 'd':
+				case 'i':
+					
+					break;	
 				default:
 					_putchar(format[c]);
-					_putchar(format[++c]);
+					_putchar(format[c + 1]);
+					len += 2;
 					break;
 			}
+			len += _format(format[c + 1], ptr);
+			c++;
 
 		} else if (format[c] != '\0')
 		{
