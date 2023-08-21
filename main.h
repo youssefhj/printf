@@ -9,7 +9,7 @@
 int _printf(const char *format, ...);
 int _parser(const char *format, va_list ptr);
 int _putchar(char c);
-int _atoi(char *s);
+void _display_number(int num, int *len);
 int _format(const char *format, int c, va_list ptr);
 
 #endif

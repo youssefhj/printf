@@ -10,12 +10,13 @@
  */
 int _format(const char *format, int c, va_list ptr)
 {
-	int len = 0;
+	int len, num;
 	char *str;
 
 	if (format == NULL)
 		return (-1);
 
+	len = 0;
 	switch (format[c + 1])
 	{
 		case 'c':
@@ -40,7 +41,22 @@ int _format(const char *format, int c, va_list ptr)
 
 		case 'd':
 		case 'i':
-
+			num = va_arg(ptr, int);
+			if (num < 0)
+			{
+				_putchar('-');
+				num *= -1;
+				len++;
+			}
+			if (num == 0)
+			{
+				_putchar ('0');
+				len++;
+			}
+			else
+			{
+				_display_number(num, &len);
+			}
 			break;
 		default:
 			_putchar(format[c]);
