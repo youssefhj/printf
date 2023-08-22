@@ -12,6 +12,6 @@ void token_x(va_list ptr, int *len)
 	unsigned int ui;
 
 	ui = va_arg(ptr, unsigned int);
-	
+
 	_display_hex_x(ui, len);
 }
